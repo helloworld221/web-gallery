@@ -1,15 +1,18 @@
+import MongoStore from "connect-mongo";
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { NextFunction, Request, Response } from "express";
 import rateLimit from "express-rate-limit";
-import session from "express-session";
+import session, { SessionOptions } from "express-session";
 import helmet from "helmet";
 import passport from "passport";
+import swaggerUi from "swagger-ui-express";
 import { connectDB } from "./config/db";
 import { env } from "./config/env";
 import "./config/passport";
 import { loggerMiddleware } from "./middleware/logger";
 import authRoutes from "./routes/auth";
+import swaggerSpec from "./swagger";
 import logger from "./utils/logger";
 
 dotenv.config();
@@ -36,11 +39,23 @@ app.use(
     secret: env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: env.MONGODB_URI || "mongodb://localhost:27017/web-gallery",
+      collectionName: "sessions",
+      ttl: 24 * 60 * 60,
+      autoRemove: "native",
+      crypto: {
+        secret: env.SESSION_SECRET,
+      },
+    }),
     cookie: {
       secure: env.NODE_ENV === "production",
       maxAge: 24 * 60 * 60 * 1000,
+      sameSite: env.NODE_ENV === "production" ? "none" : "lax",
+      httpOnly: env.NODE_ENV === "production" ? true : false,
+      domain: undefined,
     },
-  })
+  } as SessionOptions)
 );
 
 app.use(passport.initialize());
@@ -76,6 +91,7 @@ app.get("/health", (_req: Request, res: Response) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
   logger.error({
