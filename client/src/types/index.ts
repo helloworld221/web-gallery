@@ -6,6 +6,19 @@ export interface User {
   picture?: string;
 }
 
+export interface Media {
+  _id: string;
+  userId: string;
+  filename: string;
+  originalName: string;
+  fileType: string;
+  s3Key: string;
+  url: string;
+  size?: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface AuthState {
   isAuthenticated: boolean;
   user: User | null;

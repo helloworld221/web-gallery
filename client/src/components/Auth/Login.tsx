@@ -6,6 +6,8 @@ import { useAuth } from "../../hooks/useAuth";
 const Login: React.FC = () => {
   const { login, error, isAuthenticated, loading } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
+  const [isLeaving, setIsLeaving] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,9 +16,27 @@ const Login: React.FC = () => {
     }
   }, [isAuthenticated, loading, navigate]);
 
+  useEffect(() => {
+    if (error) {
+      setIsLeaving(false);
+      const timer = setTimeout(() => {
+        closeAlert();
+      }, 5000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+
+  const closeAlert = () => {
+    setIsLeaving(true);
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 500);
+  };
+
   const handleLogin = async () => {
     setIsLoading(true);
-    login();
+    await login();
     setIsLoading(false);
   };
 
@@ -28,7 +48,20 @@ const Login: React.FC = () => {
     <div className="login-container">
       <div className="card">
         <h2>Welcome to Web Gallery</h2>
-        {error && <div className={`alert alert-danger`}>{error}</div>}
+        {isVisible && error && (
+          <div
+            className={`alert alert-danger ${isLeaving ? "alert-closing" : ""}`}
+          >
+            <span className="alert-message">{error}</span>
+            <button
+              type="button"
+              className="alert-close-btn"
+              onClick={closeAlert}
+            >
+              &times;
+            </button>
+          </div>
+        )}
         <p>Sign in to upload and manage your media files</p>
         <button
           className="login-btn"
