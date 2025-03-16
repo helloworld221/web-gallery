@@ -987,3 +987,114 @@ button,
   justify-content: flex-end;
   gap: 0.75rem;
 }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--space-md);
+  }
+
+  .media-grid {
+    grid-template-columns: repeat(auto-fill, minmax(8.75rem, 1fr));
+    gap: var(--space-md);
+  }
+
+  .card,
+  .navbar .container {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .navbar-brand {
+    font-size: var(--font-lg);
+  }
+
+  /* Upload zone */
+  .upload-zone {
+    padding: var(--space-xl);
+  }
+
+  .upload-zone-icon {
+    font-size: 1.5rem;
+  }
+
+  .upload-zone-text p {
+    font-size: 0.9rem;
+  }
+
+  /* Media modal for mobile */
+  .properties-button.desktop-only {
+    display: none;
+  }
+
+  .media-modal-content {
+    width: 95%;
+    max-height: 80vh;
+  }
+
+  .media-modal-body {
+    max-height: calc(80vh - 8.75rem);
+  }
+
+  .media-modal-header {
+    padding: 0.625rem;
+  }
+
+  .media-modal-title {
+    font-size: 0.875rem;
+  }
+
+  .media-properties-panel {
+    padding: 0.625rem;
+  }
+
+  .properties-content p {
+    font-size: 0.8125rem;
+    margin-bottom: 0.375rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .media-grid {
+    grid-template-columns: repeat(auto-fill, minmax(7.5rem, 1fr));
+    gap: var(--space-sm);
+  }
+
+  .media-item img,
+  .media-item .media-video-preview {
+    height: 7.5rem;
+  }
+
+  .media-filename {
+    font-size: var(--font-xs);
+    max-width: 70%;
+  }
+
+  .media-date {
+    font-size: 0.7rem;
+  }
+
+  .media-actions button {
+    padding: 0.1875rem;
+    font-size: 0.9rem;
+  }
+
+  /* Improve upload form on small screens */
+  .selected-file-actions {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .selected-file-actions button,
+  .delete-confirmation-actions button {
+    width: 100%;
+  }
+
+  .delete-confirmation-popup {
+    width: 95%;
+    padding: 1.25rem;
+  }
+
+  .delete-confirmation-actions {
+    flex-direction: column-reverse;
+  }
+}
