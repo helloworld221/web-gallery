@@ -12,6 +12,7 @@ import { env } from "./config/env";
 import "./config/passport";
 import { loggerMiddleware } from "./middleware/logger";
 import authRoutes from "./routes/auth";
+import mediaRoutes from "./routes/media";
 import swaggerSpec from "./swagger";
 import logger from "./utils/logger";
 
@@ -91,6 +92,7 @@ app.get("/health", (_req: Request, res: Response) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/media", mediaRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use((err: any, req: Request, res: Response, _next: NextFunction) => {
