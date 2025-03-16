@@ -1,10 +1,13 @@
-import React, { Suspense } from "react";
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Login from "./components/Auth/Login";
+import Navbar from "./components/Layout/Navbar";
+
+const Login = lazy(() => import("./components/Auth/Login"));
 
 const App: React.FC = () => {
   return (
     <>
+      <Navbar />
       <div className="container">
         <Suspense fallback={<div>Loading...</div>}>
           <Routes>
