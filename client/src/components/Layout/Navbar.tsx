@@ -1,11 +1,29 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import Sun from "../../assets/sun.svg?react";
+import Moon from "../../assets/moon.svg?react";
+
+type Theme = "light" | "dark";
 
 const Navbar: React.FC = () => {
   const { isAuthenticated, user, logout } = useAuth();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [theme, setTheme] = useState<Theme>(() => {
+    const savedTheme = localStorage.getItem("theme") as Theme;
+    return savedTheme || "light";
+  });
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
+
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
@@ -33,6 +51,20 @@ const Navbar: React.FC = () => {
           Web Gallery
         </Link>
         <div className="navbar-nav">
+          <button
+            className="theme-toggle btn-icon"
+            onClick={toggleTheme}
+            aria-label={`Switch to ${
+              theme === "light" ? "dark" : "light"
+            } mode`}
+          >
+            {theme === "light" ? (
+              <Moon width={20} height={20} />
+            ) : (
+              <Sun width={20} height={20} />
+            )}
+          </button>
+
           {isAuthenticated && user ? (
             <div className="user-dropdown" ref={dropdownRef}>
               <div className="user-avatar" onClick={toggleDropdown}>
