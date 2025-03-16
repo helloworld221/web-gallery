@@ -62,6 +62,28 @@
   --font-xl: 1.5rem;
 }
 
+/* Dark theme */
+[data-theme="dark"] {
+  --primary-color: #3b82f6;
+  --primary-hover: #60a5fa;
+  --bg-color: #111827;
+  --card-bg: #1f2937;
+  --text-color: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --border-color: #374151;
+  --danger-color: #f87171;
+  --success-color: #34d399;
+  --popup-bg: rgba(0, 0, 0, 0.75);
+  --popup-hover-bg: rgba(0, 0, 0, 0.9);
+  --hover-bg: rgba(255, 255, 255, 0.05);
+  --card-header-bg: #283548;
+
+  /* Shadows for dark mode */
+  --shadow-sm: 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 0.625rem 0.9375rem -0.1875rem rgba(0, 0, 0, 0.5);
+}
+
 /* Common animations */
 @keyframes fadeIn {
   from {
@@ -113,6 +135,28 @@ a {
   width: 100%;
   margin: 0 auto;
   padding: 0 var(--space-lg);
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  margin-right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  background-color: transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-bg);
+  color: var(--text-color);
 }
 
 /* Common components */
@@ -182,6 +226,24 @@ button,
 
 .btn-secondary:hover {
   background-color: var(--border-color);
+}
+
+/* Icon buttons */
+.btn-icon {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--space-xs);
+  margin-left: var(--space-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.btn-icon:hover {
+  color: var(--primary-color);
 }
 
 /* Delete & properties buttons */
