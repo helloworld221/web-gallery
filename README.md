@@ -57,3 +57,9 @@ This project follows a monorepo architecture with Turborepo:
 - **Workspaces**: Each directory (client, server) is a workspace
 - **Caching**: Turborepo caches build outputs for faster builds
 - **Task Running**: Parallel execution of development/build tasks
+
+## Demo
+
+[![Media Upload App Demo](https://img.youtube.com/vi/QxtO7evoFSk/hqdefault.jpg)](https://www.youtube.com/watch?v=QxtO7evoFSk)
+
+_Click the image above to watch the demo video_
