@@ -1,19 +1,9 @@
 {
-  "include": [
-    "src",
-    "svg.d.ts"
-  ],
-  "exclude": [
-    "dist",
-    "node_modules"
-  ],
+  "include": ["src", "svg.d.ts"],
+  "exclude": ["dist", "node_modules"],
   "compilerOptions": {
     "target": "ES2020",
-    "lib": [
-      "ES2020",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
     "moduleResolution": "bundler",
@@ -23,10 +13,7 @@
     "strict": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "types": [
-      "vite/client",
-      "vite-plugin-svgr/client"
-    ],
+    "types": ["vite/client", "vite-plugin-svgr/client"],
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationDir": "./dist/types",

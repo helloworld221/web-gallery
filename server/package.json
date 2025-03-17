@@ -7,7 +7,7 @@
     "start": "node dist/index.js",
     "dev": "node --watch --import=tsx src/index.ts",
     "build": "tsc --noEmit false --skipLibCheck --skipDefaultLibCheck",
-    "format": "prettier --write \"src/**/*.{js,ts,json}\"",
+    "format": "prettier --write \"src/**/*.{js,ts,json,md}\"",
     "lint": "eslint ."
   },
   "dependencies": {
